@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>App Socket</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+        <link href="../lib/styles/mystyles.css" rel="stylesheet" type="text/css"/>
+        <link href="../lib/fonts/fonts.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <section id="AuthenPage" class="full-page">
+            <div class="page">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Authentication</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="form-group text-center">
+                                    <button type="button" id="approve_btn" class="btn btn-success btn-xl" style="margin-right: 10px;">
+                                        <span class="glyphicon glyphicon-ok" style="font-size: 25px;"></span><br/>Approve
+                                    </button>
+                                    <button type="button" id="reject_btn" class="btn btn-danger btn-xl">
+                                        <span class="glyphicon glyphicon-remove" style="font-size: 25px;"></span><br/>Reject</button>          
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="button" id="code_btn" class="btn btn-info btn-xl" onclick="enterCode()">Enter code manually</button> 
+                                </div>
+                                <div class="form-group text-center">
+                                    <div id="apikey" class="code-label"></div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <p id="enter-code" class="code-label"></p>
+                                </div>                        
+                            </div>  
+                        </div>
+                    </div>
+                </div>              
+            </div>
+        </section>
+
+        <script>
+            // Socketio
+            var toogle = true;
+            var enterCode = function () {
+                toogle = !toogle;
+                document.getElementById("enter-code").innerHTML = "CCI";
+
+                document.getElementById("enter-code").style.display = toogle ? 'none' : 'block';
+            }
+
+            $(document).ready(function () {
+
+                var authInfo = null;
+                var socket = null;
+
+                function activeButton(status)
+                {
+                    $("#approve_btn").attr("disabled", !status);
+                    $("#reject_btn").attr("disabled", !status);
+                    //$("#code_btn").attr("disabled", !status);
+
+                    if (toogle == false && !status == true) {
+                        enterCode();
+                    }
+                }
+
+                function init()
+                {
+                    activeButton(false);
+
+
+                    socket = io('http://c-auto.devhost/socket/auth', {autoConnect: true});
+
+                    socket.io.on('connect_error', function (err) {
+                        activeButton(false);
+                        console.log('Error connecting to server');
+                    });
+
+                    socket.on('disconnect', function () {
+                        console.log("cauto dis-connected to server.")
+                        activeButton(false);
+                    });
+
+                    socket.on("connect", function () {
+                        //Send message to create a room
+                        this.emit("auth_initial", {clientid: "swadmin"});
+						console.log("cauto connected to server");
+                    });
+
+                    //Receive authentication info
+                    socket.on("auth_info", function (data) {
+                        authInfo = data;
+                        activeButton(true);
+                    });
+				
+					socket.on("auth_disabled_app", function(data) {
+						if (data.disabled) {
+							activeButton(false);
+						}
+					});
+                }
+
+                //Destroy
+                function destroy()
+                {
+                    if (socket != null) {
+                        socket.close();
+                    }
+                }
+
+                $("#approve_btn").on("click", function () {
+
+                    if (socket != null && authInfo != null) {
+                        socket.emit("auth_confirm", {token: authInfo.token, approved: true});
+                        //End 
+                        //socket.emit("auth_endproc", {clientid: "swadmin"});
+
+                        activeButton(false);
+                    }
+                });
+
+                $("#reject_btn").on("click", function () {
+                    if (socket != null && authInfo != null) {
+                        socket.emit("auth_confirm", {token: authInfo.token, approved: false});
+                        //End 
+                        //socket.emit("auth_endproc", {clientid: "swadmin"});
+
+                        activeButton(false);
+                    }
+                });
+
+                //Before close event
+                $(window).bind("beforeunload", function (e) {
+                    if (socket != null) {
+                        socket.close();
+                    }
+                })
+
+                init();
+            });
+
+        </script>
+    </body>
+</html>

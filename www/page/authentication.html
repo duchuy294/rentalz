@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>App Socket</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+        <link href="../lib/styles/mystyles.css" rel="stylesheet" type="text/css" />
+        <link href="../lib/fonts/fonts.css" rel="stylesheet" type="text/css" />
+        <link href="../lib/styles/w3.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.3.1.1.min.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/socket.io-1.0.0.js"></script>
+        <script type="text/javascript" src="../js/sha.js"></script>
+        <script type="text/javascript" src="../js/storage.js"></script>
+        <script type="text/javascript" src="../js/totp.js"></script>
+        <script type="text/javascript" src="../js/verification.js"></script>
+		<script type="text/javascript" src="../js/config.js"></script>
+        <!--<script type="text/javascript" src="../js/storage.js"></script>-->
+        <!--<link href="../lib/styles/circle.css" rel="stylesheet" type="text/css"/>-->
+        <style type="text/css">
+            span#enter-code {
+                font-size: 30px;
+            }
+            /*#timer-circle {
+                font-size:900%!important;
+            }
+            .c100:hover > span{
+                font-size: 0.2em;
+                line-height: 5em;
+                width: 5em;
+            }
+            .c100{
+                margin: 0;
+                background-color: transparent;
+            }
+            .c100:after {
+                top: 0.04em;
+                left: 0.04em;
+                width: 0.92em;
+                height: 0.92em;
+                background-color: transparent;
+            }
+            #timer-circle #enter-code{
+                color: #fff;
+                font-weight: bold;
+                text-shadow: 0px 1px 2px rgba(18, 79, 80, 0.88);
+            }
+            .pie, .c100 .bar, .c100.p51 .fill, .c100.p52 .fill, .c100.p53 .fill, .c100.p54 .fill, .c100.p55 .fill, .c100.p56 .fill, .c100.p57 .fill, .c100.p58 .fill, .c100.p59 .fill, .c100.p60 .fill, .c100.p61 .fill, .c100.p62 .fill, .c100.p63 .fill, .c100.p64 .fill, .c100.p65 .fill, .c100.p66 .fill, .c100.p67 .fill, .c100.p68 .fill, .c100.p69 .fill, .c100.p70 .fill, .c100.p71 .fill, .c100.p72 .fill, .c100.p73 .fill, .c100.p74 .fill, .c100.p75 .fill, .c100.p76 .fill, .c100.p77 .fill, .c100.p78 .fill, .c100.p79 .fill, .c100.p80 .fill, .c100.p81 .fill, .c100.p82 .fill, .c100.p83 .fill, .c100.p84 .fill, .c100.p85 .fill, .c100.p86 .fill, .c100.p87 .fill, .c100.p88 .fill, .c100.p89 .fill, .c100.p90 .fill, .c100.p91 .fill, .c100.p92 .fill, .c100.p93 .fill, .c100.p94 .fill, .c100.p95 .fill, .c100.p96 .fill, .c100.p97 .fill, .c100.p98 .fill, .c100.p99 .fill, .c100.p100 .fill {
+                border: 1px solid #307bbb; 
+                width: 174px;
+                height: 174px;
+                transition: 0.1s ease-in-out;
+            }*/
+            .progress.time-countdown {
+                height: 5px;
+                border-radius: 0px;
+                min-width: 220px;
+            }
+            .progress-bar {
+                -webkit-transition: width 30s ease;
+                -o-transition: width 30s ease;
+                transition: width 30s ease;
+            }
+
+        </style>
+		<script>
+			window.name = "authensection";
+		</script>
+    </head>
+
+    <body>
+        <section id="cdroneList">
+            <div class="container">                            
+                <div class="row full-page">
+                    <div class="form-group form-header text-center">
+                        <strong class="text-uppercase large-font">Authentication</strong>
+                    </div>
+                    <div class="scrollable">
+                        <form>
+                            <div class="form-group text-center" style="margin-top:20px;">
+                                <button type="button" id="approve_btn" class="btn btn-success btn-xl" style="margin-right: 20px;">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </button>
+                                <button type="button" id="reject_btn" class="btn btn-danger btn-xl">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                            <!--<div class="form-group text-center">
+                                <button type="button" id="code_btn" class="btn btn-info btn-xl" onclick="enterCode()">Enter code manually</button>
+                            </div>-->
+                            <!--<div class="form-group text-center">
+                                <div id="apikey" class="code-label"></div>
+                            </div>-->
+                            <!--<div class="form-group text-center">
+                                <div class="clearfix">
+                                    <div style="font-size:20px;left:48%;" class="big green">
+                                        <span id="enter-code" style="color:grey;font-weight:bold;"></span>
+                                    </div>
+                                </div>                                    
+                            </div>-->
+                            <div class="form-group text-center" style="display: table; margin-top:30px; margin-left: auto; margin-right: auto">
+                                <!--<div class="clearfix" id="clearfix">
+                                        <div id="timer-circle" class="c100 big green p100">
+                                            <span id="timer">
+                                                <span id="enter-code"></span>
+                                            </span>
+                                            <div class="slice">
+                                                <div class="bar"></div>
+                                                <div class="fill"></div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                <span id="enter-code"></span>
+                                <!--<div class="progress time-countdown">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 100%;"></div>
+                                </div>-->
+                                <div class="w3-progress-container progress time-countdown">
+                                    <div id="timer-count-down" class="w3-progressbar w3-green" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <!--<div class="form-group text-center">
+                                <div class="clearfix">
+                                    <div style="font-size:20px;left:48%;" class="small orange">
+                                        <span id="enter-code" style="color:grey;font-weight:bold;"></span>
+                                    </div>
+                                </div>
+                                <div class="clearfix" id="clearfix">
+                                    <div id="timer-circle" class="c100 small orange">
+                                        <span id="timer" style="color:grey;font-weight:bold;"></span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                    </div>
+                    </form> 
+                </div>
+            </div>  
+        </div>            
+    </section>  
+</body>
+	<script type="text/javascript" src="../js/authentication.js"></script>
+</html>

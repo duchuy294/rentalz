@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>CDrone</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="js/jquery.3.1.1.min.js"></script>
+        <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/socket.io-1.0.0.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
+        <script type="text/javascript" src="js/verification.js"></script>
+        <script type="text/javascript" src="js/config.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <link href="lib/styles/mystyles.css" rel="stylesheet" type="text/css" />
+        <link href="lib/fonts/fonts.css" rel="stylesheet" type="text/css" />
+
+        <script>
+            window.name = "homepage";
+        </script>
+    </head>  
+
+    <body id="page-top" class="index">
+        <section id="mainPage">
+            <div class="row full-page">  
+                <div class="form-group img-header form-header text-center">
+                    <img src="lib/image/BrandingLogo.png" alt="CCIntegration" />&nbsp;&nbsp;&nbsp;<span>C-Autom</span>
+                </div>
+                <div class="scrollable index-page">                   
+                    <div id="login-register" class="form-group" style="display: none;">
+                        <div class="form-wapper">
+                            <div id="device-reject-msg" style="padding: 0 15px; display: none;" class="form-group text-center status submission-error">
+                                <h4 class="message-title">We couldn't sign you in.</h4>
+                                <ul class="message-copy">
+                                    <li>...</li>
+                                </ul>
+                            </div>
+                            <div class="text-center">
+                                <form id="login" class="login-form" tabindex="-1" style="width: 80%; margin: 15px auto;">      
+                                    <div class="form-group">
+                                        <span class="login-logo glyphicon glyphicon-user"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="login-email" type="text" name="email" class="text-center login" aria-describedby="login-email-desc" minlength="3" maxlength="254"
+                                               aria-required="true" required="" placeholder="Username"
+                                               value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="login-password" type="password" name="password" class="text-center login" minlength="2" maxlength="75" aria-required="true"
+                                               required="" value="" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <button id="register-device" type="button" class="btn btn-success btn-sm">LOG IN</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="user-logout" class="form-group text-center" style="display: none;">
+                        <div class="col-xs-12">
+                            <span class="glyphicon glyphicon-user"></span>&nbsp<span id="user-name">Gentlement</span>
+                            &nbsp;-&nbsp;<a id="logout-action" class="link">Log out</a>
+                        </div>
+                    </div>
+                    <div id="form-app" class="form-group" style="display: none;">
+                        <div class="col-xs-12 text-center menu-icon-grid">
+                            <div class="icon-text col-xs-6 col-sm-4 col-md-3">
+                                <a class="btn-menu" href="./page/authentication.html">
+                                    <span class="menu-icon glyphicon glyphicon-ok-sign"></span><br>
+                                    <div class="menu-text">Authentication Code</div></a>
+                            </div>
+                            <!--                            <div class="icon-text col-xs-6 col-sm-4 col-md-3">
+                                                            <a class="btn-menu" href="./page/cdrone.html">
+                                                                <span class="menu-icon glyphicon glyphicon-phone"></span><br>
+                                                                <div class="menu-text">CDrone Device</div></a>
+                                                        </div>-->
+                            <div class="icon-text col-xs-6 col-sm-4 col-md-3">
+                                <a class="btn-menu" href="./page/cdronelist.html">
+                                    <span class="menu-icon glyphicon glyphicon-list"></span><br>
+                                    <div class="menu-text">CDrone List</div>
+                                </a>
+                            </div>
+                            <div class="icon-text col-xs-6 col-sm-4 col-md-3">
+                                <a class="btn-menu" href="./page/cdroneinfo.html">
+                                    <span class="menu-icon glyphicon glyphicon-info-sign"></span><br>
+                                    <div class="menu-text">CDrone Info</div>
+                                </a>
+                            </div>
+                            <!--<div class="col-sm-2"><a class="btn btn-default btn-xl" href="./page/authentication.html">Authentication Code</a></div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>            
+    </section>    
+    <footer>
+        <div class="container"></div>
+    </footer>
+    <!-- Modal -->
+    <div class="modal fade" id="confirmDigister" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-alert"></span>&nbsp;&nbsp;Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                            <span id="msg-confirm-register">...</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove-sign"></span> Abort
+                    </button>
+                    <button id="re-register-device" type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok-sign"></span> OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+</body>
+<script type="text/javascript" src="js/authentication.js"></script>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RentalZ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"> -->
+    <!-- <script type="text/javascript" src="js/jquery.3.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/socket.io-1.0.0.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/storage.js"></script>
+    <script type="text/javascript" src="js/verification.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/index.js"></script> -->
+    <!-- <link href="lib/styles/mystyles.css" rel="stylesheet" type="text/css" /> -->
+    <link href="lib/fonts/fonts.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap stylesheet -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- font -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900%7CPT+Serif:400,400i,700,700i"
+        rel="stylesheet">
+    <link href="css/ele-style.css" rel="stylesheet" type="text/css" />
+    <!-- stylesheet -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- font-awesome -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- crousel css -->
+    <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <!--bootstrap select-->
+    <link href="js/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <link href="js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <script>
+        window.name = "homepage";
+    </script>
+</head>
+
+<body id="page-top" class="index">
+    <div class="slice">
+        <!-- slide-detail start here -->
+        <div class="slide-detail">
+            <div class="container">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-2 wid">
+                            <h2>Vui lòng nhập thông tin các trường bắt buộc<span class="required-field"> (*)</span></h2>
+                            <label>Tên thuộc tính<span class="required-field"> (*)</span></label>
+                            <input id="name" name="s" class="form-control" value=""
+                                placeholder="Nhập tên thuộc tính.." type="text">
+                        </div>
+                        <div class="col-sm-2 wid2">
+                            <label>Địa chỉ tài sản<span class="required-field"> (*)</span></label>
+                            <input id="address" name="s" class="form-control" value=""
+                                placeholder="Nhập địa chỉ khách sạn, phòng cho thuê của bạn .." type="text">
+                        </div>
+                        <div class="col-sm-2 wid2">
+                            <label>Loại bất động sản<span class="required-field"> (*)</span></label>
+                            <select id="type" class="selectpicker form-control" name="location" required>
+                                <option value="1">Căn hộ</option>
+                                <option value="2">Nhà ở</option>
+                                <option value="3">Bungalow</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 wid2">
+                            <label>Phòng ngủ<span class="required-field"> (*)</span></label>
+                            <select id="room" class="selectpicker form-control" name="location" required>
+                                <option value="1">Studio</option>
+                                <option value="2">Một</option>
+                                <option value="3">Hai</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 wid date">
+                            <label>Ngày và giờ thêm Thuộc tính<span class="required-field"> (*)</span></label>
+                            <input id="createdAt" name="s" class="form-control" value="" placeholder="Ngày/Tháng/Năm"
+                                type="text">
+                            <button type="button" class="calender"><i class="fa fa-calendar-o"
+                                    aria-hidden="true"></i></button>
+                        </div>
+                        <div class="col-sm-3 wid2">
+                            <label>Giá thuê hàng tháng<span class="required-field"> (*)</span></label>
+                            <input id="pricePerMonth" name="s" class="form-control" value=""
+                                placeholder="Ngân sách tối đa (VND)" type="text">
+                        </div>
+                        <div class="col-sm-2 wid">
+                            <label>Các loại đồ nội thất<span class="required-field"> (*)</span></label>
+                            <select id="furniture" class="selectpicker form-control" name="location" required>
+                                <option value="0"></option>
+                                <option value="1">Nội thất</option>
+                                <option value="2">Chưa hoàn thiện</option>
+                                <option value="3">Đã trang bị một phần</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 wid2">
+                            <label>Ghi chú<span class="required-field"> (*)</span></label>
+                            <input id="noted" name="s" class="form-control" value=""
+                                placeholder="Nhập thông tin ghi chú" type="text">
+                        </div>
+                        <div class="col-sm-3 wid2">
+                            <button id="confirm" class="btn-primary" type="button">xác nhận</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- slide-detail end here -->
+    </div>
+</body>
+<script type="text/javascript" src="js/authentication.js"></script>
+<!-- jquery -->
+<script src="js/jquery.2.1.1.min.js"></script>
+<!-- bootstrap js -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!--bootstrap select-->
+<script src="js/dist/js/bootstrap-select.js"></script>
+<!-- owlcarousel js -->
+<script src="js/owl-carousel/owl.carousel.min.js"></script>
+<!--internal js-->
+<script src="js/internal.js"></script>
+<!--date js-->
+<script src="js/datetimepicker/moment.js"></script>
+<script src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript" src="js/booking.js"></script>
+
+</html>
