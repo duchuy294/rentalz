@@ -48,8 +48,8 @@
                         <div class="col-sm-2 wid">
                             <h2>Vui lòng nhập thông tin các trường bắt buộc<span class="required-field"> (*)</span></h2>
                             <label>Tên thuộc tính<span class="required-field"> (*)</span></label>
-                            <input id="name" name="s" class="form-control" value=""
-                                placeholder="Nhập tên thuộc tính.." type="text">
+                            <input id="name" name="s" class="form-control" value="" placeholder="Nhập tên thuộc tính.."
+                                type="text">
                         </div>
                         <div class="col-sm-2 wid2">
                             <label>Địa chỉ tài sản<span class="required-field"> (*)</span></label>
@@ -82,26 +82,29 @@
                         <div class="col-sm-3 wid2">
                             <label>Giá thuê hàng tháng<span class="required-field"> (*)</span></label>
                             <input id="pricePerMonth" name="s" class="form-control" value=""
-                                placeholder="Ngân sách tối đa (VND)" type="text">
+                                placeholder="Ngân sách tối đa (VND)" type="number">
                         </div>
                         <div class="col-sm-2 wid">
-                            <label>Các loại đồ nội thất<span class="required-field"> (*)</span></label>
+                            <label>Các loại đồ nội thất</label>
                             <select id="furniture" class="selectpicker form-control" name="location" required>
-                                <option value="0"></option>
+                                <option value="0">Tùy chọn</option>
                                 <option value="1">Nội thất</option>
                                 <option value="2">Chưa hoàn thiện</option>
                                 <option value="3">Đã trang bị một phần</option>
                             </select>
                         </div>
                         <div class="col-sm-2 wid2">
-                            <label>Ghi chú<span class="required-field"> (*)</span></label>
-                            <input id="noted" name="s" class="form-control" value=""
-                                placeholder="Nhập thông tin ghi chú" type="text">
+                            <label>Ghi chú</label>
+                            <textarea id="noted" class="form-control" placeholder="Nhập thông tin ghi chú" name="s"
+                                rows="4" cols="50"></textarea>
+                            <!-- <input id="noted" name="s" class="form-control" value=""
+                                placeholder="Nhập thông tin ghi chú" type="text"> -->
                         </div>
                         <div class="col-sm-3 wid2">
                             <button id="confirm" class="btn-primary" type="button">xác nhận</button>
                         </div>
                     </div>
+                    <div id="snackbar">Some text some message..</div>
                 </form>
             </div>
         </div>

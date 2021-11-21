@@ -1,8 +1,18 @@
 (function (document, window) {
     // Login Section
-    if (window.name != "homepage")
+    if (window.name != 'homepage')
         return false;
 
+    const LOCALE_VI = {
+        name: 'Tên thuộc tính',
+        address: 'Địa chỉ tài sản',
+        type: 'Loại bất động sản',
+        room: 'Phòng ngủ',
+        createdAt: 'Ngày',
+        pricePerMonth: 'Giá thuê hàng tháng',
+        furniture: 'Các loại đồ nội thất',
+        noted: 'Ghi chú'
+    };
     class Property {
         constructor() {
             this.name = $('#name').val() || '';
@@ -28,14 +38,40 @@
         }
     }
 
+    function toastMessage(content, type) {
+        const x = document.getElementById('snackbar');
+        x.className = `mgs-${type}`;
+        x.innerHTML = content;
+        setTimeout(function () {
+            x.className = x.className.replace('mgs-error', '');
+        }, 3000);
+    }
 
-    function validateForm() {
-
+    function validateForm(data) {
+        for (const key in data) {
+            const txt = LOCALE_VI[key];
+            if (!data[key]) {
+                $(`#${key}`).css('border-color', 'red');
+                $(`#${key}`).focus();
+                toastMessage(`Vui lòng nhập ${txt}`, 'error');
+                break;
+            } else {
+                if (key === 'createdAt') {
+                    const value = $(`#${key}`).val();
+                    if (value.indexOf('/') === -1) {
+                        $(`#${key}`).val('');
+                        toastMessage(`Vui lòng chọn ${txt}`, 'error');
+                        break;
+                    }
+                }
+                $(`#${key}`).css('border-color', 'green');
+            }
+        }
     }
 
     async function createProperty(postData) {
-        const response = await fetch('http://localhost:', {
-            method: 'POST',
+        const response = await fetch('http://localhost:3002/api/v1', {
+            method: 'GET',
             body: postData, // string or object
             headers: {
                 'Content-Type': 'application/json'
@@ -49,35 +85,39 @@
     function confirm() {
         const property = new Property();
         const propertyInfo = property.getPropertyInfo();
-        console.log('propertyInfo', propertyInfo);
+        const isValidFormData = validateForm(propertyInfo);
+        if (isValidFormData) {
+            createProperty();
+        }
     }
-    
-    $("#confirm").on("click", function () {
+
+    $('#confirm').on('click', function () {
         confirm();
-        // showMsgLogin("Your device has to connect to internet.");
     });
 
     return;
 
 
     function validateLoginForm() {
-        var user = $("#login-email").val().trim(), pass = $("#login-password").val().trim();
+        var user = $('#login-email').val().trim(),
+            pass = $('#login-password').val().trim();
         if (!user) {
-            $("#login-email").focus();
+            $('#login-email').focus();
         } else if (!pass) {
-            $("#login-password").focus();
+            $('#login-password').focus();
         }
     }
+
     function nullify(islogin) {
-        // 1 alert("islogin "+ status);
+        // 1 alert('islogin '+ status);
         if (islogin) {
             // Login screen
-            $("#login-register").hide();
+            $('#login-register').hide();
             // Menu screen
-            $("#form-app").show();
+            $('#form-app').show();
         } else {
-            $("#login-register").show();
-            $("#form-app").hide();
+            $('#login-register').show();
+            $('#form-app').hide();
         }
     }
 
@@ -86,12 +126,12 @@
             register(socket);
         }
         if (!socket) {
-            showMsgLogin("Your device has to connect to internet.");
+            showMsgLogin('Your device has to connect to internet.');
         }
     }*/
     function refreshScreen() {
         var status = CVerify && CVerify.verify();
-        // 3 alert("status refreshScreen "+CVerify.verify());
+        // 3 alert('status refreshScreen '+CVerify.verify());
         nullify(status);
         //return status;
         /*if (CVerify && CVerify.verify()) {
@@ -100,10 +140,11 @@
          nullify(false);
          }*/
     }
+
     function showMsgLogin(msg) {
-        //        alert("Message "+ msg);
-        $("#device-reject-msg p.message-copy").text(msg);
-        $("#device-reject-msg").show();
+        //        alert('Message '+ msg);
+        $('#device-reject-msg p.message-copy').text(msg);
+        $('#device-reject-msg').show();
     }
     $(document).ready(function () {
         var baseUrl = Config.host;
@@ -113,31 +154,34 @@
             refreshScreen();
 
             //socket = io(baseUrl + '/socket/auth', {autoConnect: true});
-            //            alert("Host: "+baseUrl);
+            //            alert('Host: '+baseUrl);
             socket = io(baseUrl + '/socket/auth');
             socket.io.on('connect_error', function (err) {
-                //                alert("cauto can not connect to server: "+ JSON.stringify(err));
-                console.log("cauto can not connect to server: " + JSON.stringify(err));
+                //                alert('cauto can not connect to server: '+ JSON.stringify(err));
+                console.log('cauto can not connect to server: ' + JSON.stringify(err));
             });
 
             socket.on('disconnect', function () {
-                //                alert("cauto disconnect to server");
-                console.log("cauto disconnected to server.");
+                //                alert('cauto disconnect to server');
+                console.log('cauto disconnected to server.');
             });
 
-            socket.on("connect", function () {
-                //console.log("cauto connected to server.");
-                //                alert("device: "+CStore.Local.get('userid') +', '+ device.serial)
+            socket.on('connect', function () {
+                //console.log('cauto connected to server.');
+                //                alert('device: '+CStore.Local.get('userid') +', '+ device.serial)
                 //Check device
-                this.emit("check_device", { deviceid: device.serial, userid: CStore.Local.get('userid') });
+                this.emit('check_device', {
+                    deviceid: device.serial,
+                    userid: CStore.Local.get('userid')
+                });
 
             });
 
 
-            socket.on("device_valid", function (data) {
+            socket.on('device_valid', function (data) {
                 console.log(data)
                 if (data && !data.valid) {
-                    alert("Your account has been logged by another device!");
+                    alert('Your account has been logged by another device!');
                     //Clear Local Storage
                     CStore.Local.clear();
                     //Refresh screen
@@ -145,14 +189,14 @@
                 }
             });
 
-            socket.on("debug_error", function (data) {
-                //                alert("6666666666666 " + JSON.stringify(data));
+            socket.on('debug_error', function (data) {
+                //                alert('6666666666666 ' + JSON.stringify(data));
             });
 
-            socket.on("auth_device_approve", function (data) {
-                //                alert("5555555555555 " + JSON.stringify(data));
-                $("#device-reject-msg").hide();
-                $("#confirmDigister").modal("hide");
+            socket.on('auth_device_approve', function (data) {
+                //                alert('5555555555555 ' + JSON.stringify(data));
+                $('#device-reject-msg').hide();
+                $('#confirmDigister').modal('hide');
                 if (CVerify) {
                     CVerify.addAuth({
                         key: data.key,
@@ -160,58 +204,64 @@
                         appid: data.appid,
                         userid: data.userid
                     });
-                    // 6 alert("CVerify "+CVerify + ", "+data.appid);
+                    // 6 alert('CVerify '+CVerify + ', '+data.appid);
                 }
                 if (data.appid) {
                     refreshScreen();
                 }
             });
 
-            socket.on("auth_device_reject", function (data) {
-                if (data.type && data.type.toUpperCase() === "CONFIRM") {
-                    $("#msg-confirm-register").text(data.msg);
-                    $("#confirmDigister").modal();
+            socket.on('auth_device_reject', function (data) {
+                if (data.type && data.type.toUpperCase() === 'CONFIRM') {
+                    $('#msg-confirm-register').text(data.msg);
+                    $('#confirmDigister').modal();
                 } else {
                     showMsgLogin(data.msg);
                 }
             });
 
             //Login 
-            $("#login-email").keydown(function (e) {
+            $('#login-email').keydown(function (e) {
                 if (e && e.which === 13 && socket) {
                     register(socket);
                 }
                 if (!socket) {
-                    showMsgLogin("Your device has to connect to internet.");
+                    showMsgLogin('Your device has to connect to internet.');
                 }
             });
-            $("#login-password").keydown(function (e) {
+            $('#login-password').keydown(function (e) {
                 if (e && e.which === 13 && socket) {
                     register(socket);
                 }
                 if (!socket) {
-                    showMsgLogin("Your device has to connect to internet.");
+                    showMsgLogin('Your device has to connect to internet.');
                 }
             });
 
         }
 
         function register(socket, force) {
-            //$("#device-reject-msg").hide();
+            //$('#device-reject-msg').hide();
             validateLoginForm();
-            //                        alert("Connection ............. ");
+            //                        alert('Connection ............. ');
             var _noNetworks = [Connection.UNKNOWN, Connection.NONE];
-            //                        alert("socket " + socket);
+            //                        alert('socket ' + socket);
             if (!socket || _noNetworks.indexOf(navigator.connection.type) > -1) {
-                showMsgLogin("Your device has been disconnected to internet.");
+                showMsgLogin('Your device has been disconnected to internet.');
             } else {
-                var user = $("#login-email").val().trim(), pass = $("#login-password").val().trim();
-                //                        alert("Form Login Data: " + user + " "+ pass);
+                var user = $('#login-email').val().trim(),
+                    pass = $('#login-password').val().trim();
+                //                        alert('Form Login Data: ' + user + ' '+ pass);
                 if (socket != null && user && pass) {
                     if (force === undefined) {
                         force = null;
                     }
-                    socket.emit("auth_device_register", { user: user, password: pass, device: device.serial, force: force });
+                    socket.emit('auth_device_register', {
+                        user: user,
+                        password: pass,
+                        device: device.serial,
+                        force: force
+                    });
                 }
             }
         }
@@ -224,30 +274,30 @@
             }
         }
 
-        $("#register-device").on("click", function () {
+        $('#register-device').on('click', function () {
             if (socket) {
-                // 7 alert("register socket ");
+                // 7 alert('register socket ');
                 register(socket);
             } else {
-                showMsgLogin("Your device has to connect to internet.");
+                showMsgLogin('Your device has to connect to internet.');
             }
         });
-        $("#register-device").keypress(function (e) {
-            // 8 alert("Press Key on Mobile");
+        $('#register-device').keypress(function (e) {
+            // 8 alert('Press Key on Mobile');
             if (socket && e.keyCode == '13') {
                 register(socket);
             } else {
-                showMsgLogin("Your device has to connect to internet.");
+                showMsgLogin('Your device has to connect to internet.');
             }
         });
-        $("#re-register-device").on("click", function () {
+        $('#re-register-device').on('click', function () {
             if (socket) {
                 register(socket, true);
             } else {
-                showMsgLogin("Your device has to connect to internet.");
+                showMsgLogin('Your device has to connect to internet.');
             }
         });
-        $(window).bind("beforeunload", function (e) {
+        $(window).bind('beforeunload', function (e) {
             if (socket != null) {
                 socket.close();
             }
@@ -257,19 +307,22 @@
 
 (function (document, window) {
     // Authentication Section
-    if (window.name != "authensection")
+    if (window.name != 'authensection')
         return false;
-    var timerInter = null, t0 = 26, t = t0;
+    var timerInter = null,
+        t0 = 26,
+        t = t0;
     /*var enterCode = function () {
-     $(".progress.time-countdown").show();
+     $('.progress.time-countdown').show();
      setTimeout(function () {
-     $(".progress.time-countdown .progress-bar").width("0%");
+     $('.progress.time-countdown .progress-bar').width('0%');
      $('#enter-code').text(Totp.generate());
      }, 500);
      };*/
     function generateCode() {
         $('#enter-code').text(Totp.generate());
     }
+
     function checkAuth() {
         var flag = false;
         if (CVerify) {
@@ -277,12 +330,12 @@
         }
         if (!flag) {
             //var host = window.location.href.substr(0, window.location.href.length - window.location.pathname.length);
-            //window.location.assign(host + "/index.html");
+            //window.location.assign(host + '/index.html');
             if (timerInter) {
                 clearInterval(timerInter);
             }
-            $('#enter-code').text("");
-            alert("Session expired. Get back home page to login!");
+            $('#enter-code').text('');
+            alert('Session expired. Get back home page to login!');
         }
     }
 
@@ -291,9 +344,10 @@
         var authInfo = null;
         var socket = null;
         var baseUrl = Config.host;
+
         function activeButton(status) {
-            $("#approve_btn").attr("disabled", !status);
-            $("#reject_btn").attr("disabled", !status);
+            $('#approve_btn').attr('disabled', !status);
+            $('#reject_btn').attr('disabled', !status);
         }
         generateCode();
         if (timerInter) {
@@ -306,11 +360,11 @@
             if (epoch % 30 == 0) {
                 generateCode();
             }
-            $("#timer-count-down").width(Math.round((count * 100) / 30.0) + "%");
+            $('#timer-count-down').width(Math.round((count * 100) / 30.0) + '%');
         }, 1000);
         /*timerInter = setInterval(function(){
-         $(".progress.time-countdown .progress-bar").width("100%");
-         $(".progress.time-countdown").hide();
+         $('.progress.time-countdown .progress-bar').width('100%');
+         $('.progress.time-countdown').hide();
          setTimeout(function(){
          enterCode();
          }, 50);
@@ -318,7 +372,9 @@
 
         function init() {
             activeButton(false);
-            socket = io(baseUrl + '/socket/auth', { autoConnect: true });
+            socket = io(baseUrl + '/socket/auth', {
+                autoConnect: true
+            });
 
             socket.io.on('connect_error', function (err) {
                 activeButton(false);
@@ -326,25 +382,27 @@
             });
 
             socket.on('disconnect', function () {
-                console.log("cauto dis-connected to server.");
+                console.log('cauto dis-connected to server.');
                 activeButton(false);
             });
 
-            socket.on("connect", function () {
+            socket.on('connect', function () {
                 //Send message to create a room
-                this.emit("auth_initial", { clientid: CStore.Local.get('userid') });
-                //alert("APP ID NE" + CStore.Local.get('userid'));
-                //console.log("cauto connected to server");
+                this.emit('auth_initial', {
+                    clientid: CStore.Local.get('userid')
+                });
+                //alert('APP ID NE' + CStore.Local.get('userid'));
+                //console.log('cauto connected to server');
             });
 
             //Receive authentication info
-            socket.on("auth_info", function (data) {
-                console.log("auth_info", data);
+            socket.on('auth_info', function (data) {
+                console.log('auth_info', data);
                 authInfo = data;
                 activeButton(true);
             });
 
-            socket.on("auth_disabled_app", function (data) {
+            socket.on('auth_disabled_app', function (data) {
                 if (data.disabled) {
                     activeButton(false);
                 }
@@ -358,26 +416,32 @@
             }
         }
 
-        $("#approve_btn").on("click", function () {
+        $('#approve_btn').on('click', function () {
             if (socket != null && authInfo != null) {
-                socket.emit("auth_confirm", { token: authInfo.token, approved: true });
+                socket.emit('auth_confirm', {
+                    token: authInfo.token,
+                    approved: true
+                });
                 //End 
-                //socket.emit("auth_endproc", {clientid: "swadmin"});
+                //socket.emit('auth_endproc', {clientid: 'swadmin'});
                 activeButton(false);
             }
         });
 
-        $("#reject_btn").on("click", function () {
+        $('#reject_btn').on('click', function () {
             if (socket != null && authInfo != null) {
-                socket.emit("auth_confirm", { token: authInfo.token, approved: false });
+                socket.emit('auth_confirm', {
+                    token: authInfo.token,
+                    approved: false
+                });
                 //End 
-                //socket.emit("auth_endproc", {clientid: "swadmin"});
+                //socket.emit('auth_endproc', {clientid: 'swadmin'});
                 activeButton(false);
             }
         });
 
         //Before close event
-        $(window).bind("beforeunload", function (e) {
+        $(window).bind('beforeunload', function (e) {
             if (socket != null) {
                 socket.close();
             }
