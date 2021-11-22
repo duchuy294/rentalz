@@ -7314,6 +7314,17 @@ li:hover .sport {
     color: #f44336;
 }
 
+#snackbar.mgs-success {
+    /* color: white; */
+    background-color: #4caf50;
+    visibility: visible;
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 3s;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+    color: #f44336;
+}
+
 /* Animations to fade the snackbar in and out */
 @-webkit-keyframes fadein {
     from {
