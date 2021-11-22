@@ -7,14 +7,16 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
-    <content src="index.html" />
+    <content src="Search.html" />
+    <content src="ListPropertyAdded.html" />
+    <content src="ListPropertyAdded" />
+    <content src="DetailsProperty.html" />
     <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+	<allow-navigation href="*"/>
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>

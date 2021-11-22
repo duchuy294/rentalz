@@ -87,20 +87,36 @@
     }
 
     async function createProperty(formData) {
-        const response = await fetch('http://localhost:3000/api/hotel/new', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+        $.ajax({
+            type: 'POST',
+            url: 'http://rentalz-sanbox.vn/api/hotel/new',
+            data: formData,
+            dataType: 'json',
+            success: function (dataR) {
+                if (dataR.status) {
+                    toastMessage(dataR.message, 'success');
+                    clearFormData(formData);
+                }
             },
-            body: JSON.stringify(formData)
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Status: " + textStatus + " error:" + errorThrown);
+            },
+            timeout: 5000
         });
+        // const response = await fetch('http://localhost:3000/api/hotel/new', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(formData)
+        // });
 
-        const result = await response.json();
-        if (result.status) {
-            toastMessage(result.message, 'success');
-            clearFormData(formData);
-        }
+        // const result = await response.json();
+        // if (result.status) {
+        //     toastMessage(result.message, 'success');
+        //     clearFormData(formData);
+        // }
     }
 
     function confirm() {
