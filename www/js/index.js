@@ -87,7 +87,10 @@ var app = {
         }
     },
     validateApp: function () {
-        var cciDb = window.sqlitePlugin.openDatabase({ name: 'cauto.db', location: 'default' });
+        var cciDb = window.sqlitePlugin.openDatabase({
+            name: 'cauto.db',
+            location: 'default'
+        });
         cciDb.transaction(
             function (tx) {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS cuser(name, appid, seed, expire)');
@@ -109,7 +112,8 @@ var app = {
         window.CStore.Sqlite.execute(insert, ["a", "b", "c", 123],
             function (a, b) {
                 alert(JSON.stringify(a) + "--" + JSON.stringify(b));
-            }, function (a, b) {
+            },
+            function (a, b) {
                 alert(JSON.stringify(a) + "--" + JSON.stringify(b));
             }
         );
@@ -117,7 +121,8 @@ var app = {
         window.CStore.Sqlite.execute(query, ["a"],
             function (a, b) {
                 alert(JSON.stringify(a) + "--" + JSON.stringify(b));
-            }, function (a, b) {
+            },
+            function (a, b) {
                 alert(JSON.stringify(a) + "--" + JSON.stringify(b));
             }
         );

@@ -1059,7 +1059,8 @@
 		float: left;
 		padding: 17px;
 		font-size: 16px;
-		color: #fff;
+		color: #FCB714;
+		font-weight: 500;
 	}	
 	#menu .navbar-toggle{
 		color:#fff;

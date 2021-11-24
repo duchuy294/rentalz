@@ -455,6 +455,9 @@ header .social-icon ul li:hover a {
 /*--------------------------------- 
 [ Slideshow / .slideshow ]
 ----------------------------------- */
+.form-control {
+    font-size: 11px;
+}
 
 .slice {
     position: relative;
@@ -518,7 +521,7 @@ header .social-icon ul li:hover a {
     font-size: 11px;
     color: #bab5b5;
     height: 37px;
-    font-family: 'PT Serif', serif;
+    /* font-family: 'PT Serif', serif; */
 }
 
 .slide-detail form .calender {
@@ -739,7 +742,7 @@ header .social-icon ul li:hover a {
 }
 
 .product-thumb .image .matter p {
-    font-family: 'PT Serif', serif;
+    /* font-family: 'PT Serif', serif; */
     color: #fff;
     font-size: 11px;
     margin: 0 25px 24px;
@@ -1155,6 +1158,10 @@ header .social-icon ul li:hover a {
     color: #fff;
     padding: 14px 21px;
     line-height: 12px;
+}
+
+.required-field {
+    color: red;
 }
 
 footer {
@@ -4979,6 +4986,7 @@ li:hover .sport {
     background: #FBFBFB;
     border: 1px solid #E5E5E5;
     padding: 30px 15px;
+    display: inline-block;
 }
 
 .booking-form .astro {
@@ -7266,4 +7274,104 @@ li:hover .sport {
     color: #999;
     margin: 0 0 30px;
     text-transform: uppercase;
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+    visibility: hidden;
+    /* Hidden by default. Visible on click */
+    min-width: 250px;
+    /* Set a default minimum width */
+    margin-left: -125px;
+    /* Divide value of min-width by 2 */
+    background-color: #333;
+    /* Black background color */
+    color: #fff !important;
+    /* White text color */
+    text-align: center;
+    /* Centered text */
+    border-radius: 2px;
+    /* Rounded borders */
+    padding: 16px;
+    /* Padding */
+    position: fixed;
+    /* Sit on top of the screen */
+    z-index: 1;
+    /* Add a z-index if needed */
+    left: 50%;
+    /* Center the snackbar */
+    top: 30px;
+    /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.msg-error {
+    /* color: white; */
+    background-color: #f44336;
+    visibility: visible;
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 3s;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+    color: #f44336;
+}
+
+#snackbar.msg-success {
+    /* color: white; */
+    background-color: #4caf50;
+    visibility: visible;
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 3s;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+    color: #f44336;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {
+        top: 0;
+        opacity: 0;
+    }
+
+    to {
+        top: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        top: 0;
+        opacity: 0;
+    }
+
+    to {
+        top: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        top: 30px;
+        opacity: 1;
+    }
+
+    to {
+        top: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        top: 30px;
+        opacity: 1;
+    }
+
+    to {
+        top: 0;
+        opacity: 0;
+    }
 }
