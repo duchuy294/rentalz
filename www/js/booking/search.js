@@ -7,6 +7,9 @@
             this.pricePerMonth = $('#pricePerMonth').val() || '';
             this.furniture = $('#furniture').val() || '';
         }
+        getName() {
+            return this.name || '';
+        }
         getData() {
             const data = {};
             if (this.name) {
@@ -32,10 +35,23 @@
         localStorage.setItem('filterSearch', JSON.stringify(searchData));
     }
 
+    function validateForm(filterSearch) {
+        let isValid = true;
+        return isValid;
+        if (!filterSearch.getName()) {
+            window.toastMessage(`Please input name`, 'error');
+            isValid = false;
+        }
+        return isValid;
+    }
+
     $('#search').on('click', function () {
         const filterSearch = new FilterSearch();
-        const searchData = filterSearch.getData();
-        setStorageFilterSearch(searchData);
-        window.location.href = './SearchDetail.html';
+        const isValidFormData = validateForm(filterSearch);
+        if (isValidFormData) {
+            const searchData = filterSearch.getData();
+            setStorageFilterSearch(searchData);
+            window.location.href = './SearchDetail.html';
+        }
     });
 })(document, window);

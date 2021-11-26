@@ -1,9 +1,10 @@
 (function (document, window) {
     window.CONSTANT_DATA = {
         room: {
-            '0': '1',
-            '1': '2',
-            '2': '3',
+            '1': '1',
+            '2': '2',
+            '3': '3',
+            '4': '4'
         },
         type: {
             '0': 'Apartment',
@@ -17,13 +18,13 @@
             '3': 'Partly Equipped'
         },
         LOCALE_VI: {
-            name: 'Tên thuộc tính',
-            address: 'Địa chỉ tài sản',
-            type: 'Loại bất động sản',
-            room: 'Phòng ngủ',
-            createdAt: 'Ngày',
-            pricePerMonth: 'Giá thuê hàng tháng',
-            furniture: 'Các loại đồ nội thất'
+            name: 'Attribute name',
+            address: 'Address',
+            type: 'Type of real estate',
+            room: 'Bedroom',
+            createdAt: 'Create date',
+            pricePerMonth: 'Monthly rental price',
+            furniture: 'Types of furniture'
         }
     };
     window.formatNumberToMoney = function(num) {

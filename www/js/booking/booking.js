@@ -2,16 +2,6 @@
     // Login Section
     if (window.name != 'homepage')
         return false;
-
-    const LOCALE_VI = {
-        name: 'Tên thuộc tính',
-        address: 'Địa chỉ tài sản',
-        type: 'Loại bất động sản',
-        room: 'Phòng ngủ',
-        createdAt: 'Ngày',
-        pricePerMonth: 'Giá thuê hàng tháng',
-        furniture: 'Các loại đồ nội thất'
-    };
     class Property {
         constructor() {
             this.name = $('#name').val() || '';
@@ -53,12 +43,12 @@
     function validateForm(data) {
         let isValid = true;
         for (const key in data) {
-            const txt = LOCALE_VI[key] || '';
+            const txt = window.CONSTANT_DATA.LOCALE_VI[key] || '';
             if (txt) {
                 if (!data[key]) {
                     $(`#${key}`).css('border-color', 'red');
                     $(`#${key}`).focus();
-                    window.toastMessage(`Vui lòng nhập ${txt}`, 'error');
+                    window.toastMessage(`Please input ${txt}`, 'error');
                     isValid = false;
                     break;
                 } else {
@@ -66,7 +56,7 @@
                         const value = $(`#${key}`).val();
                         if (value.indexOf('/') === -1) {
                             $(`#${key}`).val('');
-                            window.toastMessage(`Vui lòng chọn ${txt}`, 'error');
+                            window.toastMessage(`Please choose ${txt}`, 'error');
                             isValid = false;
                             break;
                         }
