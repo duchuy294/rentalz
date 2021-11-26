@@ -1,21 +1,19 @@
 (function (document, window) {
     window.CONSTANT_DATA = {
         room: {
-            '0': '',
-            '1': '1',
-            '2': '2',
-            '3': '3'
+            '0': '1',
+            '1': '2',
+            '2': '3',
         },
         type: {
-            '0': '',
-            '1': 'Apartment',
-            '2': 'Hotel',
-            '3': 'Motel'
+            '0': 'Apartment',
+            '1': 'Hotel',
+            '2': 'Motel'
         },
         furniture: {
             '0': '',
             '1': 'Furniture',
-            '2': 'Unfinished',
+            '2': 'Incomplete',
             '3': 'Partly Equipped'
         },
         LOCALE_VI: {

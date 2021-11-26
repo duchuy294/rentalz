@@ -40,10 +40,10 @@
     function appendDataToHTML(data) {
         let headerContent = '';
         headerContent += `<div class="astro">
-            <img src="images/header4/image1.jpg" class="img-responsive" alt="image1" title="image1" />
+            <img src="images/propertyDetail/${data['index']}.jpg" class="img-responsive" alt="image1" title="image1" />
             <div class="caption">
                 <h3>Property name: ${data['name']}</h3>
-                <h5><i class="icon_pencil-edit"></i>Note</h5>
+                <h5><i class="icon_pencil-edit"></i>${data['noted']}</h5>
             </div>
             <div>
                 <input id="update-detail" number="${data['index']}" type="button" value="Update" />
@@ -79,10 +79,7 @@
             </li>
             <li>
                 <p>Furniture<span>${window.CONSTANT_DATA.furniture[data.furniture]}</span></p>
-            </li>
-            <li>
-                <p>Notes<span>${data.noted}</span></p>
-            </li>`;
+            </li>`
         footerContent += '</ul>';
         $('#footer-detail .detail').append(footerContent);
     }

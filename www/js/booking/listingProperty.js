@@ -55,19 +55,20 @@
                 const roomName = roomCode && room ? room[roomCode] : '';
                 const typeCode = data[i]['room'] || '';
                 const typeName = typeCode && type ? type[typeCode] : '';
+                //   //  <h2><p>${roomName} - ${typeName}</p></h2>
                 const index = data[i]['index'] || '';
                 contentHTML += `<li>
                     <div class="product-thumb search-detail" number="${index}">
                         <div class="image">
-                            <a> <img src="images/tour/img1.jpg"
+                            <a> <img src="images/listingProperty/${index}.jpg"
                                     class="img-responsive" alt="img1" title="img1" /></a>
                             <div class="hoverbox">
                                 <div class="icon_plus" aria-hidden="true"></div>
                             </div>
                         </div>
                         <div class="caption">
-                            <a><h4>${name}</h4></a>
-                            <p>${roomName} - ${typeName}</p>
+                            <a><h1 style="text-align: center;">${name}</h1></a>
+                     
                         </div>
                     </div>
                 </li>`;
