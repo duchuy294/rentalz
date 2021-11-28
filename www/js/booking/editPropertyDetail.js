@@ -78,7 +78,7 @@
                 if (!data[key]) {
                     $(`#${key}`).css('border-color', 'red');
                     $(`#${key}`).focus();
-                    window.toastMessage(`Vui lòng nhập ${txt}`, 'error');
+                    window.toastMessage(`Please enter ${txt}`, 'error');
                     isValid = false;
                     break;
                 } else {
@@ -86,7 +86,7 @@
                         const value = $(`#${key}`).val();
                         if (value.indexOf('/') === -1) {
                             $(`#${key}`).val('');
-                            window.toastMessage(`Vui lòng chọn ${txt}`, 'error');
+                            window.toastMessage(`Please choose ${txt}`, 'error');
                             isValid = false;
                             break;
                         }
