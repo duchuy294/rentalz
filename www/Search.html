@@ -7,11 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Home</title>
     <!-- Bootstrap stylesheet -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <!-- font -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900%7CPT+Serif:400,400i,700,700i"
-        rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">    <!-- font -->
+  
     <link href="css/ele-style.css" rel="stylesheet" type="text/css" />
     <!-- stylesheet -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -26,6 +23,90 @@
 </head>
 
 <body>
+    <div id="top">
+        <div class="container">
+            <div id="top-links" class="nav">
+                <ul class="list-inline pull-left">
+                    <li>
+                        <a href="#">Welcome to rentalz</a>
+                    </li>
+                    <li>
+                        <form method="post" enctype="multipart/form-data" id="form-language">
+                            <div class="btn-group">
+                                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                                    Language : <span class="name"><span class="hidden-xs">English</span> <i
+                                            class="fa fa-caret-down"></i></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:;">English</a></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </li>
+                    <li>
+                        <form method="post" enctype="multipart/form-data" id="form-currency">
+                            <div class="btn-group">
+                                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                                    Currency : <span class="name"><span class="hidden-xs"> (USD)</span> <i
+                                            class="fa fa-caret-down"></i></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="currency-select btn btn-link btn-block" type="button"
+                                            name="EUR">&#8364; Euro</button></li>
+                                    <li><button class="currency-select btn btn-link btn-block" type="button"
+                                            name="GBP">&#163; Pound Sterling</button></li>
+                                    <li><button class="currency-select btn btn-link btn-block" type="button"
+                                            name="USD">$ US Dollar</button></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                    <div class="social-icon">
+                        <ul class="list-inline">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://plus.google.com/" target="_blank"><i class="social_googleplus"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://in.pinterest.com/" target="_blank"><i class="fa fa-pinterest-p"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                            <li><a href="https://photos.google.com/" target="_blank"><i class="social_picassa"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                    <div id="logo">
+                        <a href="index.html"><img class="img-responsive" src="images/logo.png" alt="logo"
+                                title="logo" /></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
     <!-- menu start here -->
     <div id="menu">
         <div class="container">
@@ -47,11 +128,11 @@
                             <ul class="nav navbar-nav">
                                 <li class="dropdown"><a href="#" class="dropdown-toggle"
                                         data-toggle="dropdown">Manage</a>
-                                    <ul class="dropdown-menu">
+                                                    <ul class="dropdown-menu">
                                         <li><a href="index.html"><i class="fa fa-angle-right"
-                                                    aria-hidden="true"></i>AddPropertyPage</a></li>
+                                                    aria-hidden="true"></i><b>AddPropertyPage</b></a></li>
                                         <li><a href="Search.html"><i class="fa fa-angle-right"
-                                                    aria-hidden="true"></i>SearchPage</a></li>
+                                                    aria-hidden="true"></i><b>SearchPage</b></a></li>
                                     </ul>
                                 </li>
                                 <li><a href="ListPropertyAdded.html">List Property</a></li>
@@ -81,7 +162,7 @@
                         <div class="col-sm-2 wid2">
                             <label>Type of real estate</label>
                             <select id="type" class="selectpicker form-control" name="location" required>
-                                <option value=""></option>
+                                <option value="0"></option>
                                 <option value="1">Apartment</option>
                                 <option value="2">Motel</option>
                                 <option value="3">Hotel</option>
@@ -94,6 +175,7 @@
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                         <div class="col-sm-3 wid2" style="padding-top: 10px;">
@@ -104,7 +186,7 @@
                         <div class="col-sm-2 wid">
                             <label>Types of furniture</label>
                             <select id="furniture" class="selectpicker form-control" name="location" required>
-                                <option value=""></option>
+                                <option value="0"></option>
                                 <option value="1">Furniture</option>
                                 <option value="2">Incomplete</option>
                                 <option value="3">Partially equipped</option>

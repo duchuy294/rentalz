@@ -7,9 +7,10 @@
             '4': '4'
         },
         type: {
-            '0': 'Apartment',
-            '1': 'Hotel',
-            '2': 'Motel'
+            '0': '',
+            '1': 'Apartment',
+            '2': 'Hotel',
+            '3': 'Motel'
         },
         furniture: {
             '0': '',

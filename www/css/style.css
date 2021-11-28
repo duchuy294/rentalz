@@ -321,7 +321,7 @@ header .social-icon ul li:hover a {
 #menu,
 #menu1 {
     min-height: 26px;
-    background: #28272F;
+    background:  #1a53ff;
     border-radius: 0px;
 }
 
@@ -535,7 +535,7 @@ header .social-icon ul li:hover a {
 
 .slide-detail form .calender i,
 .slide-detail form .btn i {
-    background: #FCB714;
+    background: #1a53ff;
     color: #fff;
     padding: 9px 10px;
     font-size: 18px;
@@ -555,7 +555,7 @@ header .social-icon ul li:hover a {
 }
 
 .slide-detail form .btn-primary {
-    background: #FCB714;
+    background: #1a53ff;
     color: #fff;
     font-weight: 700;
     text-transform: uppercase;

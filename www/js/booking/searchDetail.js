@@ -54,7 +54,7 @@
                     <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                     <div class="product-thumb">
                         <div class="image">
-                            <a href="#"><img src="images/phocohoian.gif" alt="p2" title="p2"
+                            <a href="#"><img src="images/propertyDetail/${index}.jpg" alt="p2" title="p2"
                                     class="img-responsive" /></a>
                             <div class="hoverbox">
                                 <div class="icon_plus" aria-hidden="true"></div>
@@ -71,7 +71,7 @@
                         <div class="caption">
                             <div class="text-center">
                                 <button id="search-detail" number="${index}" type="button">
-                                    Xem Chi Tiết 
+                                    View Details
                                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                 </button>
                             </div>
