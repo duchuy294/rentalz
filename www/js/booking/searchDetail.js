@@ -47,7 +47,7 @@
                 const cost = data[i]['pricePerMonth'] ? window.formatNumberToMoney(data[i]['pricePerMonth']) : null;
                 const roomCode = data[i]['room'] || '';
                 const roomName = roomCode && room ? room[roomCode] : '';
-                const typeCode = data[i]['room'] || '';
+                const typeCode = data[i]['type'] || '';
                 const typeName = typeCode && type ? type[typeCode] : '';
                 const index = data[i]['index'] || '';
                 contentHTML += `
@@ -71,7 +71,7 @@
                         <div class="caption">
                             <div class="text-center">
                                 <button id="search-detail" number="${index}" type="button">
-                                    View Details
+                                   View Details
                                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                 </button>
                             </div>

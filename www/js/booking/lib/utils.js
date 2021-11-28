@@ -7,13 +7,11 @@
             '4': '4'
         },
         type: {
-            '0': '',
             '1': 'Apartment',
             '2': 'Hotel',
             '3': 'Motel'
         },
         furniture: {
-            '0': '',
             '1': 'Furniture',
             '2': 'Incomplete',
             '3': 'Partly Equipped'
